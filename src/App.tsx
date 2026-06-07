@@ -52,8 +52,6 @@ function App() {
           ADD MUSE
         </button>
       </section>
-
-      <Flags />
     </>
   )
 }

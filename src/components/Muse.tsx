@@ -28,16 +28,16 @@ const img = {
 }
 
 export default function Muse() {
-	const [museName, 	 setMuseName] 	= useState('');
-	const [museImg, 	 setMuseImg]  	= useState(['']);
-	const [flag1Img, 	 setFlag1]  		= useState(['']);
-	const [flag2Img, 	 setFlag2]  		= useState(['']);
-	const [flag3Img, 	 setFlag3]  		= useState(['']);
-	const [flag4Img, 	 setFlag4]  		= useState(['']);
-	const [modal1Open, setModal1Open] = useState(false);
-	const [modal2Open, setModal2Open] = useState(false);
-	const [modal3Open, setModal3Open] = useState(false);
-	const [modal4Open, setModal4Open] = useState(false);
+	const [museName, 		setMuseName] 		= useState('');
+	const [museImg, 		setMuseImg]  		= useState(['']);
+	const [flag1Img, 		setFlag1]  			= useState(['']);
+	const [flag2Img, 		setFlag2]  			= useState(['']);
+	const [flag3Img, 		setFlag3]  			= useState(['']);
+	const [flag4Img, 		setFlag4]  			= useState(['']);
+	const [modal1Open, 	setModal1Open] 	= useState(false);
+	const [modal2Open, 	setModal2Open] 	= useState(false);
+	const [modal3Open, 	setModal3Open] 	= useState(false);
+	const [modal4Open, 	setModal4Open] 	= useState(false);
 
   const { getRootProps:getMuseRootProps, getInputProps:getMuseInputProps } = useDropzone({ 
 		onDrop: useCallback(acceptedFiles => {
