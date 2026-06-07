@@ -100,7 +100,16 @@ export default function Muse() {
 				<Grid container spacing={1}>
 					<Grid size={4}>
 						<div {...getMuseRootProps()} style={museBox}>
-							<img style={img} key={museImg[0]} src={museImg[0]} />
+							{!museImg[0] && <p>CLICK BELOW TO ADD IMG</p>}
+							<div style={{ 
+								backgroundImage: `url(${museImg[0]})`,
+								backgroundSize: 'cover',
+								backgroundRepeat: 'no-repeat',
+								backgroundPosition: 'center',
+								display: 'inline-block',
+								width: '100%',
+								height: '100%'
+							}}></div>
 							<input {...getMuseInputProps()} />
 						</div>
 					</Grid>
