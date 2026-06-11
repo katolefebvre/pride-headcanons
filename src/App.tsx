@@ -1,5 +1,7 @@
 import { useState, useRef } from 'react';
 import Muse from './components/Muse';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import html2canvas from 'html2canvas';
 
 import './App.css'
@@ -28,7 +30,7 @@ function App() {
     const canvas = await html2canvas(element, {
       scale: window.devicePixelRatio,
       useCORS: true,
-      backgroundColor: "#16171d"
+      backgroundColor: "#16171d",
     });
 
     const dataUrl = canvas.toDataURL('image/png');
@@ -51,23 +53,29 @@ function App() {
 
       <section>
         <div style={{ marginTop: '40px' }}>
-          {sections.map((section) => (
-            <div key={section}>
-              <div ref={ref}>
-                <Muse />
-              </div>
-              <button 
-                style={{ marginTop: '10px' }}
-                className='counter' 
-                onClick={() => handleDeleteSection(section)}
-              >DELETE MUSE</button>
-              <button 
-                style={{ marginTop: '10px' }}
-                className='counter' 
-                onClick={handleDownloadImage}
-              >SCREENSHOT</button>
+            <div>
+              <Box sx={{ flexGrow: 2 }}>
+                <Grid container spacing={10}>
+                  {sections.map((section) => (
+                  <Grid size={{ xs: 12, sm: 6}}>
+                    <div key={section} ref={ref}>
+                      <Muse />
+                      <button 
+                        style={{ marginTop: '10px' }}
+                        className='counter' 
+                        onClick={() => handleDeleteSection(section)}
+                      >DELETE MUSE</button>
+                      <button 
+                        style={{ marginTop: '10px' }}
+                        className='counter' 
+                        onClick={handleDownloadImage}
+                      >SCREENSHOT</button>
+                    </div>
+                  </Grid>
+                  ))}
+                </Grid>
+              </Box>
             </div>
-          ))}
         </div>
       </section>
       <section>

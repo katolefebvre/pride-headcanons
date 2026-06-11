@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useRef } from 'react';
 import Flags from './Flags';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -8,15 +8,15 @@ import { useDropzone } from 'react-dropzone';
 import '../App.css'
 
 const museBox = {
-  width: 300,
-  height: 416,
+  width: '300%',
+  height: 300,
 	overflow: 'hidden'
 };
 
 const flagBox = {
-	display: 'inline-flex',
-  width: 300,
-  height: 200,
+	display: 'grid',
+  width: 150,
+  height: 150,
 	overflow: 'hidden'
 }
 
@@ -39,7 +39,7 @@ export default function Muse() {
 	const [modal3Open, 	setModal3Open] 	= useState(false);
 	const [modal4Open, 	setModal4Open] 	= useState(false);
 
-  const { getRootProps:getMuseRootProps, getInputProps:getMuseInputProps } = useDropzone({ 
+  const { getRootProps:getMuseRootProps, getInputProps:getMuseInputProps, open } = useDropzone({ 
 		onDrop: useCallback(acceptedFiles => {
 			setMuseImg(acceptedFiles.map(file => URL.createObjectURL(file)))
 		}, [setMuseImg])
@@ -90,17 +90,31 @@ export default function Muse() {
 	}
 
 	return(
-		<section id="center">
+		<section id='center'>
 			<input 
-				value={museName} 
+				value={museName}
+				placeholder='MUSE NAME'
 				name="museName"
 				onChange={e => setMuseName(e.target.value)}
 			/>
 			<Box sx={{ flexGrow: 2 }}>
-				<Grid container spacing={1}>
+				<Grid container spacing={0}>
+					<Grid size={'auto'}></Grid>
 					<Grid size={4}>
 						<div {...getMuseRootProps()} style={museBox}>
-							{!museImg[0] && <p>CLICK BELOW TO ADD IMG</p>}
+							<input {...getMuseInputProps()}/>
+							{ !museImg[0] && 
+								<div style={{ 
+									backgroundColor: '#fff',
+									backgroundSize: 'cover',
+									backgroundRepeat: 'no-repeat',
+									backgroundPosition: 'center',
+									display: 'inline-block',
+									width: '100%',
+									height: '100%'
+								}}>
+								</div>
+							}
 							<div style={{ 
 								backgroundImage: `url(${museImg[0]})`,
 								backgroundSize: 'cover',
@@ -109,12 +123,15 @@ export default function Muse() {
 								display: 'inline-block',
 								width: '100%',
 								height: '100%'
-							}}></div>
-							<input {...getMuseInputProps()} />
+							}}>
+							</div>
 						</div>
+						
 					</Grid>
-					<Grid size={4}>
-						<Stack spacing={2}>
+					<Grid size={3}></Grid>
+					<Grid size={3}></Grid>
+					<Grid size={'auto'}>
+						<Stack spacing={0}>
 							<div {...getFlag1RootProps()} style={flagBox}>
 								<img style={img} key={flag1Img[0]} src={flag1Img[0]} onClick={() => {
 									setModal1Open(true);
@@ -129,8 +146,8 @@ export default function Muse() {
 							</div>
 						</Stack>
 					</Grid>
-					<Grid size={4}>
-						<Stack spacing={2}>
+					<Grid size={'auto'}>
+						<Stack spacing={0}>
 							<div {...getFlag3RootProps()} style={flagBox}>
 								<img style={img} key={flag3Img[0]} src={flag3Img[0]} onClick={() => {
 									setModal3Open(true);
@@ -145,6 +162,7 @@ export default function Muse() {
 							</div>
 						</Stack>
 					</Grid>
+					<Grid size={3}></Grid>
 				</Grid>
 			</Box>
 			{modal1Open && (
